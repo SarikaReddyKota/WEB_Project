@@ -19,7 +19,7 @@ export class JobsComponent implements OnInit {
   resumeTechnologies;
   url;
   searchTitle;
-  interval: NodeJS.Timer;
+  interval: any;
   //@Input('formValue') formValue: any;
 
   constructor(private jobsService : JobsService, private router: Router, public dialog: MatDialog, private carrerService: CarrerService) { }
