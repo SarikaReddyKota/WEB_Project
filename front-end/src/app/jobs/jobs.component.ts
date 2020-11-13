@@ -14,12 +14,14 @@ CarrerService
 
 export class JobsComponent implements OnInit {
   showdiv=true;
+  showcareer=true;
   jobsData;
   jobDescription;
   resumeTechnologies;
   url;
   searchTitle;
   interval: any;
+  careerOpenings: Object;
   //@Input('formValue') formValue: any;
 
   constructor(private jobsService : JobsService, private router: Router, public dialog: MatDialog, private carrerService: CarrerService) { }
@@ -27,6 +29,7 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
     let id = sessionStorage.getItem("res-session");
     
+
     this.carrerService.updatedcarrerJobLink.subscribe(link => {
       
       if (link == '') {
@@ -89,12 +92,28 @@ export class JobsComponent implements OnInit {
       });
     }, 100);
   }
+
+  gotoShowCareer() {
+    this.showcareer = !this.showcareer;
+    this.interval = setTimeout(() => {
+      window.scroll({
+        top: 3000,
+        left: 0,
+        behavior: "smooth"
+      });
+    }, 100);
+  }
   getDefaultJobs() {
     this.jobsService.getJobs().subscribe(res => {
       //console.log('data jobs data44444', res);
       this.searchTitle = "Recommended Jobs";
       this.jobsData = res;
     })
+    this.jobsService.getCarrersData('MO').subscribe( res => {
+      this.careerOpenings = res;
+      console.log(this.careerOpenings)
+
+    });
   }
 
   getSearchedJobs(data) {
@@ -111,8 +130,25 @@ export class JobsComponent implements OnInit {
       
       this.jobsData = res;
     })
-  }
 
+    if(data){
+      data.location= data.location? data.location:"United States" ;
+       console.log(data.location);
+      this.jobsService.getCarrersData(data.location).subscribe( res => {
+        this.careerOpenings = res;
+        console.log(this.careerOpenings)
+  
+      });
+    }
+   
+
+    
+  }
+  openRespectiveJobs(link) {
+    //console.log('link to open@@@@@@', link);
+    this.carrerService.updatecarrerJobLink(link);
+   // this.router.navigate(['dashboard/']);
+  } 
   getDescription(job) {
     
     this.jobsService.getJobDescription(job.link).subscribe( res => {

@@ -33,7 +33,10 @@ export class JobsService {
     let body = { url : data };
     return this.http.post(this.serverUrl + '/jobs/custom',body);
   }
-
+  getCarrersData(value) { 
+    let body = { data : value };
+    return this.http.post(this.serverUrl + '/carrer/stats', body);
+  }
   getJobDescription(data) { 
     //console.log('data in service file', data);
     let body = { link : data };

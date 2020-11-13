@@ -5,7 +5,7 @@
 </div>
 
 
-
+<ng-container *ngIf="jobsData">
 
 <div class="row pt-2">
 
@@ -51,3 +51,58 @@
   </ng-container>
 
 </div>
+
+</ng-container>
+
+
+<div>
+  <span class="alignleft">Career Openings</span>
+  <span class="alignright" *ngIf="showcareer" (click)="gotoShowCareer()">More</span>
+  <span class="alignright" *ngIf="!showcareer" (click)="showcareer=!showcareer">Hide</span>
+</div>
+
+<ng-container  *ngIf="careerOpenings">
+<div class="row pt-2">
+  <ng-container *ngFor="let career of careerOpenings let i=index">
+    <ng-container *ngIf="i<4 && showcareer">
+  <div class="col-sm-6">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{career.jobTitle}}</mat-card-title>
+        <mat-card-subtitle class="text-weight">{{career.openings}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text-weight">{{career.average}} : &nbsp;{{career.salary}}&nbsp;{{career.period}}</div>
+        <div>
+        <!--  <button class="btn btn-login" (click)="openRespectiveJobs(career.jobsLink)">See Openings</button>  -->
+        
+        </div>
+      </mat-card-content>
+    </mat-card>
+</div>
+</ng-container>
+
+
+</ng-container>
+<ng-container *ngFor="let career of careerOpenings let i=index">
+  <ng-container *ngIf="!showcareer">
+<div class="col-sm-6">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{career.jobTitle}}</mat-card-title>
+      <mat-card-subtitle class="text-weight">{{career.openings}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="text-weight">{{career.average}} : &nbsp;{{career.salary}}&nbsp;{{career.period}}</div>
+      <div>
+      <!--  <button class="btn btn-login" (click)="openRespectiveJobs(career.jobsLink)">See Openings</button>  -->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</ng-container>
+
+
+</ng-container>
+</div>
+</ng-container>
