@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Upload Resume</h1>
+<div mat-dialog-content>
+
+  <!-- <mat-form-field>
+    <input matInput>
+  </mat-form-field> -->
+
+  <!-- <input type="file" #fileUpload (change)="uploadAndProgress($event.target.files)" [(ngModel)]="data.resumeFile">
+  <div *ngIf="percentDone > 0">Upload Percent: {{percentDone}}%</div> -->
+  <div>
+    <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()" enctype="form-data">      
+      <div>
+        <input type="file" name="profile" accept=".doc, .docx" (change)="onFileSelect($event)" />
+      </div>
+      <br>
+      <div>
+        <button class="btn btn-success" type="submit">Upload</button>
+      </div>
+    </form>
+    <!-- <div *ngIf="resumeData">Resume Uploaded Successfully!!!!</div> -->
+    <div *ngIf="resumeData">{{uploadMessage}}</div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-success align-right" mat-button [mat-dialog-close]="resumeData" cdkFocusInitial>Ok</button>
+</div>

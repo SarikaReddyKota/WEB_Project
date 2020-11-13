@@ -1,0 +1,14 @@
+.tabHeading {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.headbgColor {
+    background-color: lightgray;
+}
+
+.mat-card{
+    text-align: center;
+}
+
+.btn-login{background: #085ff7; color:#fff; font-weight:600;}

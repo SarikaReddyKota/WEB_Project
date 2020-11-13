@@ -1,0 +1,22 @@
+<!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button> -->
+
+<mat-icon class="close-icon" color="warn" [mat-dialog-close]="true">close</mat-icon>
+
+<div mat-dialog-title>
+  <div>{{jobData.name}}</div>
+  <div>{{jobData.company}}&nbsp; {{jobData.rating}}</div>
+  <div>{{jobData.location}}</div>
+  <div>
+    <button class="btn btn-login"><a href={{jobData.link}} target="_blank">Apply</a></button>
+  </div>
+</div>
+<div mat-dialog-content>
+  <div *ngIf="jobData">
+    <div [innerHTML]="jobData.description"></div>
+  </div>
+</div>
+<mat-dialog-actions align="right">
+  <button class="btn btn-login close-icon" mat-dialog-close tabindex="-1">Close</button>
+</mat-dialog-actions>

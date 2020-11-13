@@ -1,0 +1,53 @@
+<div>
+  <span class="alignleft">{{searchTitle}}</span>
+  <span class="alignright" *ngIf="showdiv" (click)="gotoTop()">More</span>
+  <span class="alignright" *ngIf="!showdiv" (click)="showdiv=!showdiv">Hide</span>
+</div>
+
+
+
+
+<div class="row pt-2">
+
+    <ng-container *ngFor="let job of jobsData let i=index">
+      <ng-container *ngIf="i<4 && showdiv">
+    <div class="col-sm-6">
+    <mat-card class="example-card">
+      <mat-card-header [routerLink]="" (click)="getDescription(job)">
+        <mat-card-title>{{job.name}}</mat-card-title>
+        <mat-card-subtitle>{{job.company}} &nbsp; {{job.rating}}</mat-card-subtitle>
+        <mat-card-subtitle>{{job.location}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <button class="btn btn-login"><a href={{job.link}} target="_blank">Apply</a></button>
+        </div>
+        <div title="{{job.summary}}" class="summary">
+          {{truncatesummary(job.summary)}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>
+<ng-container *ngIf="!showdiv">
+  <div class="col-sm-6">
+  <mat-card class="example-card">
+    <mat-card-header [routerLink]="" (click)="getDescription(job)">
+      <mat-card-title>{{job.name}}</mat-card-title>
+      <mat-card-subtitle>{{job.company}} &nbsp; {{job.rating}}</mat-card-subtitle>
+      <mat-card-subtitle>{{job.location}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <button class="btn btn-login"><a href={{job.link}} target="_blank">Apply</a></button>
+      </div>
+      <div  title="{{job.summary}}"  class="summary">
+        {{truncatesummary(job.summary)}}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</ng-container>
+  </ng-container>
+
+</div>

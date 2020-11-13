@@ -1,0 +1,80 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand" (click)="onClick()">
+    <img src="./assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    Jobs Finder
+  </a>
+
+  <div class="form-inline">
+    <button (click)="upload()" class="btn btn-login float-right">Post Resume</button> &nbsp;
+    <button (click)="carrer()" class="btn btn-login float-right">Career</button> &nbsp;
+    <button (click)="logOut()" class="btn btn-login float-right">Log out</button> &nbsp;
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row" *ngIf="!formType">
+    <div class="login-sec">
+      <form [formGroup]="jobsForm" class="login-form" (ngSubmit)="findJobs()">
+        <div class="row col-md-12">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="what" class="text-uppercase">What</label>
+              <input type="text" class="form-control" formControlName="jobKeywords"
+                placeholder="Job title, Keywords or Company">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="where" class="text-uppercase">Where</label>
+              <input type="text" formControlName="location" class="form-control" placeholder="Kansas City, MO">
+
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-check">
+              <label class="form-check-label">
+                <!-- <input type="checkbox" class="form-check-input"> -->
+
+              </label>
+              <button type="submit" class="btn btn-login float-right">Find</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="formType">
+    <div class="login-sec">
+      <h2 class="text-center">Explore career information by location</h2>
+      <div class="col-md-8">
+        <div class="form-group">
+          <!-- <label for="where" class="text-uppercase">Explore career information by location</label> -->
+          <input type="text" #carrerLocation class="form-control" placeholder="United States">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group"> 
+          <button type="submit" (click)="searchCarrer(carrerLocation.value)" class="btn btn-login float-right">Search</button>
+        </div>
+      </div>
+    </div>
+      
+    
+  </div>
+
+  <div>
+    <!-- <app-jobs></app-jobs> -->
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- <div *ngIf="rawData">
+  <h3>Raw Data from uploaded Resume </h3>
+  <div>
+    {{rawData}}
+  </div>
+</div> -->

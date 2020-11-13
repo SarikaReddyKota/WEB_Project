@@ -1,0 +1,23 @@
+.btn-login {
+  background: #085ff7;
+  color: #fff;
+  font-weight: 600;
+}
+
+a {
+  color: white;
+  /* text-decoration: none; */
+  background-color: transparent;
+}
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+}
+
+.close-icon {
+    float: right;
+  }
+ .mat-dialog-content {
+    overflow: hidden;
+}
