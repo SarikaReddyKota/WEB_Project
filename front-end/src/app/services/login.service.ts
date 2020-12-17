@@ -11,7 +11,6 @@ export class LoginService {
   serverUrl;
   constructor(private http: HttpClient, private router: Router) {
     this.serverUrl = environment.serverUrl;
-    //console.log('url############',this.serverUrl);
    } 
 
   private userLoggedin = new BehaviorSubject<boolean>(false);

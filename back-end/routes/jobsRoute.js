@@ -120,13 +120,6 @@ router.post("/custom", async (req, res) => {
             .find("a")
             .attr('href');
           let linkPrefix = 'https://www.indeed.com' + link;
-          // console.log('link prefix@@@@@@@@@', linkPrefix); viewJobButtonLinkContainer
-          // if(jobTitle == 'Software Engineer' && companyName == 'Capital One') {
-          //   console.log('link prefix@@@@@@@@@', applyLink);
-          // }
-          // if(applyLink == null || applyLink == undefined){
-          //   applyLink = linkPrefix;
-          // }
           let one = {
             name: jobTitle,
             company: companyName,
