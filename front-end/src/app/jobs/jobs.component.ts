@@ -37,20 +37,22 @@ export class JobsComponent implements OnInit {
         this.jobsService.getResumeTechnologies(JSON.parse(id).token).subscribe( res => {
           if(res[0]){
             this.resumeTechnologies = res[Object.keys(res).length - 1].technologies;
-            //console.log('resu techs $$$$$$', this.resumeTechnologies);
           if(this.resumeTechnologies.length != 0) {
-            //console.log('testing@@@@@@', res);
             this.url = 'https://www.indeed.com/jobs?q=';
             this.resumeTechnologies.forEach(item =>{
               this.url += '+' + item;
             })
-            //console.log('fored url',this.url);
             this.jobsService.getCustomJobs(this.url).subscribe(jobs => {
-              //console.log('testing jobs data@@@@@@', jobs);
               this.jobsData = jobs;
               this.searchTitle = "Recommended Jobs";
               if(this.jobsData.length == 0) {
                 this.getDefaultJobs();
+              }else{
+                this.jobsService.getCarrersData('MO').subscribe( res => {
+                  this.careerOpenings = res;
+                  console.log(this.careerOpenings)
+            
+                });
               }
             })
           } else {
@@ -105,7 +107,6 @@ export class JobsComponent implements OnInit {
   }
   getDefaultJobs() {
     this.jobsService.getJobs().subscribe(res => {
-      //console.log('data jobs data44444', res);
       this.searchTitle = "Recommended Jobs";
       this.jobsData = res;
     })
@@ -132,9 +133,15 @@ export class JobsComponent implements OnInit {
     })
 
     if(data){
-      data.location= data.location? data.location:"United States" ;
+      data.location= data.location? data.location:"MO" ;
        console.log(data.location);
       this.jobsService.getCarrersData(data.location).subscribe( res => {
+        this.careerOpenings = res;
+        console.log(this.careerOpenings)
+  
+      });
+    }else{
+      this.jobsService.getCarrersData("MO").subscribe( res => {
         this.careerOpenings = res;
         console.log(this.careerOpenings)
   
@@ -145,9 +152,7 @@ export class JobsComponent implements OnInit {
     
   }
   openRespectiveJobs(link) {
-    //console.log('link to open@@@@@@', link);
     this.carrerService.updatecarrerJobLink(link);
-   // this.router.navigate(['dashboard/']);
   } 
   getDescription(job) {
     
@@ -155,10 +160,6 @@ export class JobsComponent implements OnInit {
       this.jobDescription = res;
       
       job['description'] = this.jobDescription
-      // let presentJobData = {
-      //   jobData: job,
-      //   description: this.jobDescription
-      // }
 
       let dialogRef = this.dialog.open(JobDescriptionComponent, {
         panelClass: 'my-class',
